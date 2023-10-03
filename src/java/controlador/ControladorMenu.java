@@ -11,14 +11,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import modelo.Celador;
 
 /**
  *
  * @author CGAO
  */
-@WebServlet(name = "ControladorCelador", urlPatterns = {"/ControladorCelador"})
-public class ControladorCelador extends HttpServlet {
+@WebServlet(name = "ControladorMenu", urlPatterns = {"/ControladorMenu"})
+public class ControladorMenu extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,16 +30,30 @@ public class ControladorCelador extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String opcion = request.getParameter("opcion");
+        
+        switch (opcion) {
+            case "Celador":
+            case "Portatil":
+            case "Aprendiz":
+            case "Entrada":    
+                request.getRequestDispatcher("/WEB-INF/formulario"+opcion+".jsp").forward(request, response);
+            default:
+                request.getRequestDispatcher("/index.html").forward(request, response);
+            break;
+        }
+        
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ControladorCelador</title>");            
+            out.println("<title>Servlet ControladorMenu</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ControladorCelador at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ControladorMenu at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -72,38 +85,6 @@ public class ControladorCelador extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("fIdCelador");
-        String nombre = request.getParameter("fNombre");
-        String ident = request.getParameter("fIdent");
-        String accion = request.getParameter("fAccion");
-        
-        int idCelador=0;
-        try {
-            idCelador = Integer.parseInt(id);
-        } catch (NumberFormatException nfe) {
-        }
-        
-        Celador unaCelador = new Celador();
-        unaCelador.setIdCelador(idCelador);            
-        unaCelador.setNombre(nombre);
-        unaCelador.setIdent(ident);
-        
-        String mensaje="";
-        switch (accion.toLowerCase()) {
-            case "insertar":
-                unaCelador.insertar();
-                mensaje="Inserto Celador";
-            break;
-            case "modificar":
-                unaCelador.modificar();
-                mensaje="Modifico Celador";
-            break;
-            case "eliminar":
-                unaCelador.eliminar();
-                mensaje="Elimino Celador";
-            break;
-        }
-        request.getRequestDispatcher("/WEB-INF/formularioCelador.jsp?msj="+mensaje).forward(request,response);
         processRequest(request, response);
     }
 

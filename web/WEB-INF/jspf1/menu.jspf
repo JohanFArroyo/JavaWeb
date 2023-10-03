@@ -1,0 +1,9 @@
+
+<nav>
+    <ul>
+        <li><a href="ControladorMenu?opcion=Celador">Celador</a></li>
+        <li><a href="ControladorMenu?opcion=Portatil">Portatil</a></li>
+        <li><a href="ControladorMenu?opcion=Aprendiz">Aprendiz</a></li>
+        <li><a href="ControladorMenu?opcion=Entrada">Entrada</a></li>
+    </ul>
+</nav>

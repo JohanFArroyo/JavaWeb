@@ -11,14 +11,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import modelo.Celador;
+import modelo.Aprendiz;
 
 /**
  *
  * @author CGAO
  */
-@WebServlet(name = "ControladorCelador", urlPatterns = {"/ControladorCelador"})
-public class ControladorCelador extends HttpServlet {
+@WebServlet(name = "ControladorAprendiz", urlPatterns = {"/ControladorAprendiz"})
+public class ControladorAprendiz extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +37,10 @@ public class ControladorCelador extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ControladorCelador</title>");            
+            out.println("<title>Servlet ControladorAprendiz</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ControladorCelador at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ControladorAprendiz at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -72,38 +72,42 @@ public class ControladorCelador extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         String id = request.getParameter("fIdCelador");
         String nombre = request.getParameter("fNombre");
         String ident = request.getParameter("fIdent");
+        String ficha = request.getParameter("fFicha");
         String accion = request.getParameter("fAccion");
         
-        int idCelador=0;
+        int idAprendiz=0;
         try {
-            idCelador = Integer.parseInt(id);
+            idAprendiz = Integer.parseInt(id);
         } catch (NumberFormatException nfe) {
         }
         
-        Celador unaCelador = new Celador();
-        unaCelador.setIdCelador(idCelador);            
-        unaCelador.setNombre(nombre);
-        unaCelador.setIdent(ident);
+        Aprendiz unaAprendiz = new Aprendiz();
+        unaAprendiz.setIdAprendiz(idAprendiz);            
+        unaAprendiz.setNombre(nombre);
+        unaAprendiz.setIdent(ident);
+        unaAprendiz.setFicha(ficha);
         
         String mensaje="";
         switch (accion.toLowerCase()) {
             case "insertar":
-                unaCelador.insertar();
-                mensaje="Inserto Celador";
+                unaAprendiz.insertar();
+                mensaje="Inserto Aprendiz";
             break;
             case "modificar":
-                unaCelador.modificar();
-                mensaje="Modifico Celador";
+                unaAprendiz.modificar();
+                mensaje="Modifico Aprendiz";
             break;
             case "eliminar":
-                unaCelador.eliminar();
-                mensaje="Elimino Celador";
+                unaAprendiz.eliminar();
+                mensaje="Elimino Aprendiz";
             break;
         }
-        request.getRequestDispatcher("/WEB-INF/formularioCelador.jsp?msj="+mensaje).forward(request,response);
+        request.getRequestDispatcher("/WEB-INF/formularioAprendiz.jsp?msj="+mensaje).forward(request,response);
+        
         processRequest(request, response);
     }
 

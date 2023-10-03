@@ -11,14 +11,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import modelo.Celador;
+import modelo.Entrada;
 
 /**
  *
  * @author CGAO
  */
-@WebServlet(name = "ControladorCelador", urlPatterns = {"/ControladorCelador"})
-public class ControladorCelador extends HttpServlet {
+@WebServlet(name = "ControladorEntrada", urlPatterns = {"/ControladorEntrada"})
+public class ControladorEntrada extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +37,10 @@ public class ControladorCelador extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ControladorCelador</title>");            
+            out.println("<title>Servlet ControladorEntrada</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ControladorCelador at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ControladorEntrada at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -72,38 +72,68 @@ public class ControladorCelador extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("fIdCelador");
-        String nombre = request.getParameter("fNombre");
-        String ident = request.getParameter("fIdent");
+        
+        String id = request.getParameter("fIdEntrada");
+        String idC = request.getParameter("fIdCelador");
+        String idA = request.getParameter("fIdAprendiz");
+        String idP = request.getParameter("fIdPortatil");
+        String fechaE = request.getParameter("fFechaE");
+        String fechaS = request.getParameter("fFechaS");
         String accion = request.getParameter("fAccion");
         
-        int idCelador=0;
+        int idEntrada=0;
         try {
-            idCelador = Integer.parseInt(id);
+            idEntrada = Integer.parseInt(id);
         } catch (NumberFormatException nfe) {
         }
         
-        Celador unaCelador = new Celador();
-        unaCelador.setIdCelador(idCelador);            
-        unaCelador.setNombre(nombre);
-        unaCelador.setIdent(ident);
+        int idCelador=0;
+        try {
+            idCelador = Integer.parseInt(idC);
+        } catch (NumberFormatException nfe) {
+        }
+        
+        int idAprendiz=0;
+        try {
+            idAprendiz = Integer.parseInt(idA);
+        } catch (NumberFormatException nfe) {
+        }
+        
+        int idPortatil=0;
+        try {
+            idPortatil = Integer.parseInt(idP);
+        } catch (NumberFormatException nfe) {
+        }
+        
+        Entrada unaEntrada = new Entrada();
+        unaEntrada.setIdEntrada(idEntrada);            
+        unaEntrada.setIdCelador(idCelador);            
+        unaEntrada.setIdAprendiz(idAprendiz);            
+        unaEntrada.setIdPortatil(idPortatil);            
+        unaEntrada.setFechaE(fechaE);
+        unaEntrada.setFechaS(fechaS);
         
         String mensaje="";
         switch (accion.toLowerCase()) {
             case "insertar":
-                unaCelador.insertar();
-                mensaje="Inserto Celador";
+                unaEntrada.insertar();
+                mensaje="Inserto Entrada";
             break;
             case "modificar":
-                unaCelador.modificar();
-                mensaje="Modifico Celador";
+                unaEntrada.modificar();
+                mensaje="Modifico Entrada";
             break;
             case "eliminar":
-                unaCelador.eliminar();
-                mensaje="Elimino Celador";
+                unaEntrada.eliminar();
+                mensaje="Elimino Entrada";
+            break;
+            case "salida":
+                unaEntrada.salida();
+                mensaje="Salida";
             break;
         }
-        request.getRequestDispatcher("/WEB-INF/formularioCelador.jsp?msj="+mensaje).forward(request,response);
+        request.getRequestDispatcher("/WEB-INF/formularioEntrada.jsp?msj="+mensaje).forward(request,response);
+        
         processRequest(request, response);
     }
 

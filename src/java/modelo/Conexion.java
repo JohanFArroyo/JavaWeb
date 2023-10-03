@@ -23,8 +23,8 @@ public class Conexion {
         Statement st = null;
         try{
             Context ctx = new InitialContext();
-            DataSource ds = (DataSource)ctx.lookup("jdbc/BDProyecto");
-            conexion = (Connection) ds.getConnection("Johan","usuario1234");
+            DataSource ds = (DataSource)ctx.lookup("jdbc/BDProyect");
+            conexion = (Connection) ds.getConnection("Arroyo","1234");
             st = conexion.createStatement();
         } catch(NamingException ex){
             System.err.println("Error al iniciar contexto:"+ex.getMessage());

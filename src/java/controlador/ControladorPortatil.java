@@ -11,14 +11,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import modelo.Celador;
+import modelo.Portatil;
 
 /**
  *
  * @author CGAO
  */
-@WebServlet(name = "ControladorCelador", urlPatterns = {"/ControladorCelador"})
-public class ControladorCelador extends HttpServlet {
+@WebServlet(name = "ControladorPortatil", urlPatterns = {"/ControladorPortatil"})
+public class ControladorPortatil extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +37,10 @@ public class ControladorCelador extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ControladorCelador</title>");            
+            out.println("<title>Servlet ControladorPortatil</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ControladorCelador at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ControladorPortatil at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -72,38 +72,40 @@ public class ControladorCelador extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String id = request.getParameter("fIdCelador");
-        String nombre = request.getParameter("fNombre");
-        String ident = request.getParameter("fIdent");
+        
+        String id = request.getParameter("fIdPortatil");
+        String marca = request.getParameter("fMarca");
+        String codigo = request.getParameter("fCodigo");
         String accion = request.getParameter("fAccion");
         
-        int idCelador=0;
+        int idPortatil=0;
         try {
-            idCelador = Integer.parseInt(id);
+            idPortatil = Integer.parseInt(id);
         } catch (NumberFormatException nfe) {
         }
         
-        Celador unaCelador = new Celador();
-        unaCelador.setIdCelador(idCelador);            
-        unaCelador.setNombre(nombre);
-        unaCelador.setIdent(ident);
+        Portatil unaPortatil = new Portatil();
+        unaPortatil.setIdPortatil(idPortatil);            
+        unaPortatil.setMarca(marca);
+        unaPortatil.setCodigo(codigo);
         
         String mensaje="";
         switch (accion.toLowerCase()) {
             case "insertar":
-                unaCelador.insertar();
+                unaPortatil.insertar();
                 mensaje="Inserto Celador";
             break;
             case "modificar":
-                unaCelador.modificar();
+                unaPortatil.modificar();
                 mensaje="Modifico Celador";
             break;
             case "eliminar":
-                unaCelador.eliminar();
+                unaPortatil.eliminar();
                 mensaje="Elimino Celador";
             break;
         }
-        request.getRequestDispatcher("/WEB-INF/formularioCelador.jsp?msj="+mensaje).forward(request,response);
+        request.getRequestDispatcher("/WEB-INF/formularioPortatil.jsp?msj="+mensaje).forward(request,response);
+        
         processRequest(request, response);
     }
 

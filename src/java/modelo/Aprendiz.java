@@ -13,18 +13,19 @@ import java.util.ArrayList;
  *
  * @author CGAO
  */
-public class Celador {
-    int idCelador;
+public class Aprendiz {
+    int idAprendiz;
     String nombre;
     String ident;
+    String ficha;
     int paginacion=10;
 
-    public int getIdCelador() {
-        return idCelador;
+    public int getIdAprendiz() {
+        return idAprendiz;
     }
 
-    public void setIdCelador(int idCelador) {
-        this.idCelador = idCelador;
+    public void setIdAprendiz(int idAprendiz) {
+        this.idAprendiz = idAprendiz;
     }
 
     public String getNombre() {
@@ -42,43 +43,52 @@ public class Celador {
     public void setIdent(String ident) {
         this.ident = ident;
     }
+
+    public String getFicha() {
+        return ficha;
+    }
+
+    public void setFicha(String ficha) {
+        this.ficha = ficha;
+    }
     
     public ArrayList listar (int pagina){
         Conexion conexion = new Conexion();
         Statement st = conexion.conectar();
-        ArrayList listaCeladores = new ArrayList();
-        Celador laCelador;
-        String listado = "SELECT * FROM "+this.getClass().getSimpleName()+" ORDER BY idCelador";
+        ArrayList listaAprendiz = new ArrayList();
+        Aprendiz laAprendiz;
+        String listado = "SELECT * FROM "+this.getClass().getSimpleName()+" ORDER BY idAprendiz";
         if (pagina<0) {
             int paginacionMax = pagina * this.paginacion;
             int paginacionMin = paginacionMax - this.paginacion;
-            listado = "SELECT * FROM "+this.getClass().getSimpleName()+" ORDER BY idCelador LIMIT "+paginacionMin+","+paginacionMax;
+            listado = "SELECT * FROM "+this.getClass().getSimpleName()+" ORDER BY idAprendiz LIMIT "+paginacionMin+","+paginacionMax;
         }
         
         try {
             ResultSet rs = st.executeQuery(listado);
             while (rs.next()) {                
-                laCelador = new Celador();
-                laCelador.setIdCelador(rs.getInt("idCelador"));
-                laCelador.setNombre(rs.getString("nombre"));
-                laCelador.setIdent(rs.getString("ident"));
-                listaCeladores.add(laCelador);
+                laAprendiz = new Aprendiz();
+                laAprendiz.setIdAprendiz(rs.getInt("idAprendiz"));
+                laAprendiz.setNombre(rs.getString("nombre"));
+                laAprendiz.setIdent(rs.getString("ident"));
+                laAprendiz.setFicha(rs.getString("ficha"));
+                listaAprendiz.add(laAprendiz);
                 
             }
         } catch (SQLException ex) {
-            System.err.println("Error al listar Celador:"+ex.getLocalizedMessage());
+            System.err.println("Error al listar Aprendiz:"+ex.getLocalizedMessage());
         }
         conexion.desconectar();
-        return listaCeladores;
+        return listaAprendiz;
     }
     
     public void insertar(){
         Conexion conexion = new Conexion();
         Statement st = conexion.conectar();
         try {
-            st.executeUpdate("INSERT INTO Celador(idCelador, nombre, ident)"+" VALUES("+getIdCelador()+",'"+getNombre()+"','"+getIdent()+"')");
+            st.executeUpdate("INSERT INTO Aprendiz(idAprendiz, nombre, ident, ficha)"+" VALUES("+getIdAprendiz()+",'"+getNombre()+"','"+getIdent()+"','"+getFicha()+"')");
         } catch (SQLException ex) {
-            System.err.println("Error al insesrtar Celador: "+ex.getLocalizedMessage());
+            System.err.println("Error al insesrtar Aprendiz: "+ex.getLocalizedMessage());
         }
         conexion.desconectar();
     }
@@ -87,9 +97,9 @@ public class Celador {
         Conexion conexion = new Conexion();
         Statement st = conexion.conectar();
         try {
-            st.executeUpdate("UPDATE Celador SET nombre="+getNombre()+", ident="+getIdent()+" WHERE idCelador="+getIdCelador());
+            st.executeUpdate("UPDATE Aprendiz SET nombre="+getNombre()+", ident="+getIdent()+", ficha="+getFicha()+" WHERE idAprendiz="+getIdAprendiz());
         } catch (SQLException ex) {
-            System.err.println("Error al modificar Celador:"+ex.getLocalizedMessage());
+            System.err.println("Error al modificar Aprendiz:"+ex.getLocalizedMessage());
         }
         conexion.desconectar();
     }
@@ -98,9 +108,9 @@ public class Celador {
         Conexion conexion = new Conexion();
         Statement st = conexion.conectar();
         try {
-            st.executeUpdate("DELETE FROM Celador WHERE idCelador ="+getIdCelador());
+            st.executeUpdate("DELETE FROM Aprendiz WHERE idAprendiz ="+getIdAprendiz());
         } catch (SQLException ex) {
-            System.err.println("Error al eliminar Celador:"+ex.getLocalizedMessage());
+            System.err.println("Error al eliminar Aprendiz:"+ex.getLocalizedMessage());
         }
         conexion.desconectar();
     }
@@ -110,12 +120,12 @@ public class Celador {
         Statement st = conexion.conectar();
         int cantidadDeBloques = 0;
         try{
-            ResultSet rs = st.executeQuery("SELECT CEIL(COUNT(idCelador)/"+this.paginacion+")AS cantidad FROM "+this.getClass().getSimpleName());
+            ResultSet rs = st.executeQuery("SELECT CEIL(COUNT(idAprendiz)/"+this.paginacion+")AS cantidad FROM "+this.getClass().getSimpleName());
             if (rs.next()) {
                 cantidadDeBloques = rs.getInt("cantidad");
             }
         } catch(SQLException ex){
-            System.err.println("Error al obtener la cantidad de paginas Celador"+ex.getLocalizedMessage());
+            System.err.println("Error al obtener la cantidad de paginas Aprendiz"+ex.getLocalizedMessage());
         }
         return cantidadDeBloques;
     }
