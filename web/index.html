@@ -10,38 +10,33 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
     <!-- Incluir los estilos de Bootstrap -->
-    <link href="WEB-INF/publico1/bootstrap-5.3.2-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="WEB-INF/publico1/bootstrap-5.3.2-dist/css/bootstrap.rtl.min.css" rel="stylesheet" type="text/css"/>
-    
+    <link href="publico1/bootstrap-5.3.2-dist/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">Iniciar Sesión</div>
-                    <div class="card-body">
-                        <form>
-                            <div class="form-group">
-                                <label for="correo">Correo Electrónico</label>
-                                <input type="email" class="form-control" id="correo" placeholder="Ingrese su correo electrónico" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="contrasena">Contraseña</label>
-                                <input type="password" class="form-control" id="contrasena" placeholder="Ingrese su contraseña" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
-                        </form>
-                    </div>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Iniciar Sesión</div>
+                <div class="card-body">
+                    <form action="ControladorLogin">
+                        <div class="mb-3">
+                            <label for="correo" class="form-label">Correo Electrónico</label>
+                            <input type="email" class="form-control" id="correo" name="correo" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contrasena" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="contrasena" name="contrasena" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Incluir los scripts de Bootstrap y jQuery (requerido para Bootstrap) -->
-    <script src="WEB-INF/publico1/bootstrap-5.3.2-dist/js/bootstrap.min.js" type="text/javascript"></script>
-    
-   
-    
+<!-- Agrega el enlace al archivo JS de Bootstrap (opcional, pero necesario para algunas funcionalidades de Bootstrap) -->
 </body>
 </html>
