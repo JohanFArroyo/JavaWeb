@@ -60,7 +60,6 @@ public class ControladorLogin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/formularioEntrada.html").forward(request, response);
         processRequest(request, response);
     }
 

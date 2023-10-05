@@ -10,22 +10,30 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Formulario Entrada</title>
+        <link href="publico1/bootstrap-5.3.2-dist/css/bootstrap.css" rel="stylesheet">
     </head>
 <jsp:useBean id="unaEntrada" class="modelo.Entrada" scope="request" />
     <body>
-        <jsp:include page="jspf1/menu.jspf"/>
-        <h1>Formulario Entrada</h1>
-        <table border="1">
+        <div class="container mt-4" style="font-size: 80px">
+        <ul class="list-group">
+            <li class="list-group-item d-flex align-items-center">
+                <img src="publico1/sena logo.png" alt="Imagen" width="200" height="200">
+                <span class="ml-2"  style="color: green">Ingreso SENA</span>
+            </li>
+        </ul>
+        </div>
+    <center><h1 class="display-4 text-success">Formulario Entrada</h1></center>
+        <table border="1"  class="table table-bordered table-striped table-success table">
             <tr>
-                <th>Id</th>
-                <th>Celador</th>
-                <th>Aprendiz</th>
-                <th>Portatil</th>
-                <th>fechaE</th>
-                <th>fechaS</th>
+                <th scope="col">Id</th>
+                <th scope="col">Celador</th>
+                <th scope="col">Aprendiz</th>
+                <th scope="col">Portatil</th>
+                <th scope="col">fechaE</th>
+                <th scope="col">fechaS</th>
             </tr>
         <c:forEach items="${unaEntrada.listar(0)}" var="laEntrada">
-            <tr>
+            <tr class="table-success">
             <form action="ControladorEntrada" method="post">
                 <td><input type="text" name="fIdEntrada" value="${laEntrada.idEntrada}"></td>
                 <td><input type="text" name="fIdCelador" value="${laEntrada.idCelador}"></td> 
@@ -40,7 +48,7 @@
             </form>
             </tr>
         </c:forEach>
-            <tr>
+            <tr class="table-info">
             <form action="ControladorEntrada" method="post">
                 <td><input type="number" name="fIdEntrada" value="0"></td>
                 <td><input type="text" name="fIdCelador"></td>
@@ -52,6 +60,7 @@
                     <button type="reset" name="fAccion" value="Limpiar">Limpiar</button></td>
             </form>
             </tr>    
-        </table>               
+        </table>
+        <jsp:include page="jspf1/menu.jspf"/>
     </body>
 </html>
