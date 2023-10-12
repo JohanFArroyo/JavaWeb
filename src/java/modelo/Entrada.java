@@ -105,7 +105,7 @@ public class Entrada {
     public void insertar(){
         Conexion conexion = new Conexion();
         Statement st = conexion.conectar();
-        String sql="INSERT INTO Entrada(idEntrada, idCelador, idAprendiz, idPortatil, fechaE, fechaS)"+" VALUES("+getIdEntrada()+","+getIdCelador()+","+getIdAprendiz()+","+getIdPortatil()+",'"+getFechaE()+"','"+getFechaS()+"')";
+        String sql="INSERT INTO Entrada(idEntrada, idCelador, idAprendiz, idPortatil, fechaE, fechaS)"+" VALUES("+getIdEntrada()+","+getIdCelador()+","+getIdAprendiz()+","+getIdPortatil()+",NOW(),'"+getFechaS()+"')";
         try {
             System.out.println(sql);
             st.executeUpdate(sql);
@@ -162,4 +162,6 @@ public class Entrada {
         }
         conexion.desconectar();
     }
+    
+    
 }

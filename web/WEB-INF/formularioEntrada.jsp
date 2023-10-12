@@ -54,8 +54,8 @@
                 <td><input type="text" name="fIdCelador"></td>
                 <td><input type="text" name="fIdAprendiz"></td>
                 <td><input type="text" name="fIdPortatil"></td>
-                <td><input type="text" name="fFechaE"></td>
-                <td><input type="text" name="fFechaS"></td>
+                <td><input readonly type="text" name="fFechaE"></td>
+                <td><input readonly type="text" name="fFechaS"></td>
                 <td><button type="submit" name="fAccion" value="Insertar">Insertar</button>
                     <button type="reset" name="fAccion" value="Limpiar">Limpiar</button></td>
             </form>
